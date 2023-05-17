@@ -1,0 +1,199 @@
+USE [TrendyThreads]
+GO
+/****** Object:  Table [dbo].[Cart]	Script Date: 5/16/2023 1:39:45 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Cart](
+    [CartId] [bigint] IDENTITY(1,1) NOT NULL,
+    [UserId] [bigint] NULL,
+ CONSTRAINT [PK_Cart] PRIMARY KEY CLUSTERED
+(
+    [CartId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[CartClothing]	Script Date: 5/16/2023 1:39:45 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[CartClothing](
+    [CartClothingId] [bigint] NOT NULL,
+    [CartId] [bigint] NOT NULL,
+    [ClothingId] [bigint] NOT NULL,
+ CONSTRAINT [PK_CartClothing] PRIMARY KEY CLUSTERED
+(
+    [CartClothingId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Clothing]	Script Date: 5/16/2023 1:39:45 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Clothing](
+    [ClothingId] [bigint] IDENTITY(1,1) NOT NULL,
+    [Description] [nvarchar](max) NOT NULL,
+    [ClothingTypeId] [bigint] NULL,
+    [ClothingColorId] [bigint] NULL,
+    [ClothingSizeId] [bigint] NULL,
+    [Price] [decimal](18, 2) NULL,
+ CONSTRAINT [PK_Clothing] PRIMARY KEY CLUSTERED
+(
+    [ClothingId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ClothingColor]	Script Date: 5/16/2023 1:39:45 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ClothingColor](
+    [ClothingColorId] [bigint] IDENTITY(1,1) NOT NULL,
+    [Color] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_ClothingColor] PRIMARY KEY CLUSTERED
+(
+    [ClothingColorId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ClothingSize]	Script Date: 5/16/2023 1:39:45 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ClothingSize](
+    [ClothingSizeId] [bigint] IDENTITY(1,1) NOT NULL,
+    [Size] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_ClothingSize] PRIMARY KEY CLUSTERED
+(
+    [ClothingSizeId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ClothingType]	Script Date: 5/16/2023 1:39:45 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ClothingType](
+    [ClothingTypeId] [bigint] IDENTITY(1,1) NOT NULL,
+    [Type] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_ClothingType] PRIMARY KEY CLUSTERED
+(
+    [ClothingTypeId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[User]	Script Date: 5/16/2023 1:39:45 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[User](
+    [UserId] [bigint] IDENTITY(1,1) NOT NULL,
+    [Name] [nvarchar](50) NOT NULL,
+    [Password] [nvarchar](50) NOT NULL,
+    [Email] [nvarchar](50) NOT NULL,
+    [Phone] [nvarchar](50) NULL,
+    [Address1] [nvarchar](50) NOT NULL,
+    [Address2] [nvarchar](50) NULL,
+    [City] [nvarchar](50) NOT NULL,
+    [State] [nvarchar](50) NOT NULL,
+    [Zipcode] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_User] PRIMARY KEY CLUSTERED
+(
+    [UserId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET IDENTITY_INSERT [dbo].[Cart] ON
+
+INSERT [dbo].[Cart] ([CartId], [UserId]) VALUES (1, 1)
+INSERT [dbo].[Cart] ([CartId], [UserId]) VALUES (2, 3)
+SET IDENTITY_INSERT [dbo].[Cart] OFF
+GO
+INSERT [dbo].[CartClothing] ([CartClothingId], [CartId], [ClothingId]) VALUES (1, 1, 1)
+INSERT [dbo].[CartClothing] ([CartClothingId], [CartId], [ClothingId]) VALUES (2, 2, 2)
+GO
+SET IDENTITY_INSERT [dbo].[Clothing] ON
+
+INSERT [dbo].[Clothing] ([ClothingId], [Description], [ClothingTypeId], [ClothingColorId], [ClothingSizeId], [Price]) VALUES (1, N'xxxxx', 1, 3, 2, CAST(14.00 AS Decimal(18, 2)))
+INSERT [dbo].[Clothing] ([ClothingId], [Description], [ClothingTypeId], [ClothingColorId], [ClothingSizeId], [Price]) VALUES (2, N'xxxxx', 2, 1, 4, CAST(16.00 AS Decimal(18, 2)))
+INSERT [dbo].[Clothing] ([ClothingId], [Description], [ClothingTypeId], [ClothingColorId], [ClothingSizeId], [Price]) VALUES (3, N'xxxxx', 4, 2, 3, CAST(25.00 AS Decimal(18, 2)))
+INSERT [dbo].[Clothing] ([ClothingId], [Description], [ClothingTypeId], [ClothingColorId], [ClothingSizeId], [Price]) VALUES (4, N'xxxxx', 2, 4, 5, CAST(15.00 AS Decimal(18, 2)))
+SET IDENTITY_INSERT [dbo].[Clothing] OFF
+GO
+SET IDENTITY_INSERT [dbo].[ClothingColor] ON
+
+INSERT [dbo].[ClothingColor] ([ClothingColorId], [Color]) VALUES (1, N'Black')
+INSERT [dbo].[ClothingColor] ([ClothingColorId], [Color]) VALUES (2, N'White')
+INSERT [dbo].[ClothingColor] ([ClothingColorId], [Color]) VALUES (3, N'Grey')
+INSERT [dbo].[ClothingColor] ([ClothingColorId], [Color]) VALUES (4, N'Blue')
+INSERT [dbo].[ClothingColor] ([ClothingColorId], [Color]) VALUES (5, N'Red')
+INSERT [dbo].[ClothingColor] ([ClothingColorId], [Color]) VALUES (6, N'Green')
+INSERT [dbo].[ClothingColor] ([ClothingColorId], [Color]) VALUES (7, N'Pink')
+SET IDENTITY_INSERT [dbo].[ClothingColor] OFF
+GO
+SET IDENTITY_INSERT [dbo].[ClothingSize] ON
+
+INSERT [dbo].[ClothingSize] ([ClothingSizeId], [Size]) VALUES (1, N'XS')
+INSERT [dbo].[ClothingSize] ([ClothingSizeId], [Size]) VALUES (2, N'S')
+INSERT [dbo].[ClothingSize] ([ClothingSizeId], [Size]) VALUES (3, N'M')
+INSERT [dbo].[ClothingSize] ([ClothingSizeId], [Size]) VALUES (4, N'L')
+INSERT [dbo].[ClothingSize] ([ClothingSizeId], [Size]) VALUES (5, N'XL')
+INSERT [dbo].[ClothingSize] ([ClothingSizeId], [Size]) VALUES (6, N'XXL')
+INSERT [dbo].[ClothingSize] ([ClothingSizeId], [Size]) VALUES (7, N'1X')
+INSERT [dbo].[ClothingSize] ([ClothingSizeId], [Size]) VALUES (8, N'2X')
+INSERT [dbo].[ClothingSize] ([ClothingSizeId], [Size]) VALUES (9, N'3X')
+SET IDENTITY_INSERT [dbo].[ClothingSize] OFF
+GO
+SET IDENTITY_INSERT [dbo].[ClothingType] ON
+
+INSERT [dbo].[ClothingType] ([ClothingTypeId], [Type]) VALUES (1, N'Tops')
+INSERT [dbo].[ClothingType] ([ClothingTypeId], [Type]) VALUES (2, N'Bottoms')
+INSERT [dbo].[ClothingType] ([ClothingTypeId], [Type]) VALUES (3, N'Dresses')
+INSERT [dbo].[ClothingType] ([ClothingTypeId], [Type]) VALUES (4, N'Jackets')
+INSERT [dbo].[ClothingType] ([ClothingTypeId], [Type]) VALUES (5, N'Shoes')
+SET IDENTITY_INSERT [dbo].[ClothingType] OFF
+GO
+SET IDENTITY_INSERT [dbo].[User] ON
+
+INSERT [dbo].[User] ([UserId], [Name], [Password], [Email], [Phone], [Address1], [Address2], [City], [State], [Zipcode]) VALUES (1, N'Kaitlyn Crouser', N'1234', N'kaitlyn@gmail.com', N'2063908262', N'xxxx', N'xxxx', N'xxxx', N'xxxx', N'97128')
+INSERT [dbo].[User] ([UserId], [Name], [Password], [Email], [Phone], [Address1], [Address2], [City], [State], [Zipcode]) VALUES (3, N'Shawn Mawdsley', N'123', N'shawn@gmail.com', N'1341', N'xxxx', N'xxxx', N'xxxx', N'xxxx', N'97128')
+SET IDENTITY_INSERT [dbo].[User] OFF
+GO
+ALTER TABLE [dbo].[Cart]  WITH CHECK ADD  CONSTRAINT [FK_Cart_Clothing] FOREIGN KEY([UserId])
+REFERENCES [dbo].[User] ([UserId])
+GO
+ALTER TABLE [dbo].[Cart] CHECK CONSTRAINT [FK_Cart_Clothing]
+GO
+ALTER TABLE [dbo].[CartClothing]  WITH CHECK ADD  CONSTRAINT [FK_CartClothing_Cart] FOREIGN KEY([CartId])
+REFERENCES [dbo].[Cart] ([CartId])
+GO
+ALTER TABLE [dbo].[CartClothing] CHECK CONSTRAINT [FK_CartClothing_Cart]
+GO
+ALTER TABLE [dbo].[CartClothing]  WITH CHECK ADD  CONSTRAINT [FK_CartClothing_Clothing] FOREIGN KEY([ClothingId])
+REFERENCES [dbo].[Clothing] ([ClothingId])
+GO
+ALTER TABLE [dbo].[CartClothing] CHECK CONSTRAINT [FK_CartClothing_Clothing]
+GO
+ALTER TABLE [dbo].[Clothing]  WITH CHECK ADD  CONSTRAINT [FK_Clothing_Clothing] FOREIGN KEY([ClothingSizeId])
+REFERENCES [dbo].[ClothingSize] ([ClothingSizeId])
+GO
+ALTER TABLE [dbo].[Clothing] CHECK CONSTRAINT [FK_Clothing_Clothing]
+GO
+ALTER TABLE [dbo].[Clothing]  WITH CHECK ADD  CONSTRAINT [FK_Clothing_ClothingColor] FOREIGN KEY([ClothingColorId])
+REFERENCES [dbo].[ClothingColor] ([ClothingColorId])
+GO
+ALTER TABLE [dbo].[Clothing] CHECK CONSTRAINT [FK_Clothing_ClothingColor]
+GO
+ALTER TABLE [dbo].[Clothing]  WITH CHECK ADD  CONSTRAINT [FK_Clothing_ClothingType] FOREIGN KEY([ClothingTypeId])
+REFERENCES [dbo].[ClothingType] ([ClothingTypeId])
+GO
+ALTER TABLE [dbo].[Clothing] CHECK CONSTRAINT [FK_Clothing_ClothingType]
+GO
